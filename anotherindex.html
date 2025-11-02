@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#667eea">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="description" content="Master IPA, Pronunciation & General Knowledge">
+    <meta name="description" content="Master IPA Transcription">
     <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlF1aXpNYXN0ZXIiLAogICJzaG9ydF9uYW1lIjogIlF1aXpNYXN0ZXIiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzY2N2VlYSIsCiAgInRoZW1lX2NvbG9yIjogIiM2NjdlZWEiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSFpwWlhkQ2IzZzlJakFnTUNBeE1UZ2dNVEU0SWo0OGNtVmpkQ0IzYVdSMGFEMGlNVEU0SWlCb1pXbG5hSFE5SWpFeE9DSWdabWxzYkQwaUl6WTJOMlZsWVNJdlBqeDBaWGgwSUhnOUlqVTVJaUI1UFNJMU9TSWdabWxzYkQwaUkzZG9hWFJsSWlCbWIyNTBMV1poYldsc2VUMGljMkZ1Y3kxelpYSnBaaUlnWm05dWRDMXphWHBsUFNJME1DSWdkR1Y0ZEMxaGJtTm9iM0k5SW0xcFpHUnNaU0krUWp3dmRHVjRkRDQ4TDNOMlp6ND0iLAogICAgICAic2l6ZXMiOiAiMTkyeDE5MiIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiCiAgICB9CiAgXQp9">
     <title>QuizMaster - Mobile Quiz App</title>
     <style>
@@ -16,463 +16,393 @@
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
-        
+       
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             min-height: 100vh;
             overflow-x: hidden;
             user-select: none;
             -webkit-user-select: none;
         }
-        
+       
         .container {
             max-width: 480px;
             margin: 0 auto;
             padding: 16px;
             min-height: 100vh;
         }
-        
+       
         /* Home Screen */
         .header {
             text-align: center;
-            padding: 32px 0 24px;
+            padding: 48px 0 32px;
+            animation: fadeIn 1s ease;
         }
-        
+       
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+       
         .app-icon {
-            width: 80px;
-            height: 80px;
+            width: 96px;
+            height: 96px;
             background: rgba(255,255,255,0.2);
             backdrop-filter: blur(20px);
-            border-radius: 24px;
-            margin: 0 auto 16px;
+            border-radius: 28px;
+            margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            animation: float 3s ease-in-out infinite;
+            font-size: 48px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        
+       
         .app-title {
             color: white;
-            font-size: 36px;
-            font-weight: 700;
+            font-size: 42px;
+            font-weight: 800;
             margin-bottom: 8px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        
+       
         .app-subtitle {
-            color: rgba(255,255,255,0.8);
-            font-size: 14px;
+            color: rgba(255,255,255,0.85);
+            font-size: 16px;
+            font-weight: 500;
         }
-        
+       
         .category-card {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
             backdrop-filter: blur(20px);
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 24px;
             margin-bottom: 20px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             border: 2px solid transparent;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        
-        .category-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
-            opacity: 0;
-            transition: opacity 0.3s;
+       
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
-        
-        .category-card:hover::before {
-            opacity: 1;
-        }
-        
+       
         .category-card:active {
-            transform: scale(0.97);
-            background: rgba(255,255,255,0.2);
+            transform: scale(0.98);
+            background: rgba(255,255,255,0.25);
         }
-        
+       
         .category-header {
             display: flex;
-            gap: 16px;
+            gap: 20px;
             align-items: flex-start;
         }
-        
+       
         .category-icon {
             width: 64px;
             height: 64px;
-            border-radius: 18px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 32px;
             flex-shrink: 0;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        
+       
         .icon-purple { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .icon-blue { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
-        
+        .icon-green { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+       
         .category-info {
             flex: 1;
         }
-        
+       
         .category-name {
             color: white;
             font-size: 20px;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 8px;
         }
-        
+       
         .category-desc {
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.75);
             font-size: 14px;
-            line-height: 1.4;
+            line-height: 1.5;
         }
-        
+       
         .category-score {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             margin-top: 12px;
             color: #ffd700;
             font-size: 14px;
             font-weight: 600;
         }
-        
+       
         /* Quiz Screen */
         .quiz-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 0;
+            padding: 20px 0;
         }
-        
+       
         .back-btn {
             width: 44px;
             height: 44px;
             background: rgba(255,255,255,0.2);
             backdrop-filter: blur(20px);
-            border-radius: 12px;
+            border-radius: 14px;
             border: none;
             color: white;
-            font-size: 20px;
+            font-size: 22px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
             transition: all 0.2s;
         }
-        
-        .back-btn:active {
-            transform: scale(0.95);
+       
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
         }
-        
+       
         .quiz-title {
             color: white;
             font-size: 18px;
-            font-weight: 600;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            font-weight: 700;
         }
-        
+       
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 24px;
+            gap: 16px;
+            margin-bottom: 28px;
         }
-        
+       
         .stat-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 16px;
-            padding: 16px;
-            text-align: center;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-2px);
-        }
-        
-        .stat-label {
-            color: rgba(255,255,255,0.7);
-            font-size: 12px;
-            margin-bottom: 6px;
-        }
-        
-        .stat-value {
-            color: white;
-            font-size: 28px;
-            font-weight: 700;
-        }
-        
-        .question-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 24px;
-            margin-bottom: 24px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-        }
-        
-        .question-label {
-            color: rgba(255,255,255,0.7);
-            font-size: 13px;
-            margin-bottom: 12px;
-        }
-        
-        .question-text {
-            color: white;
-            font-size: 22px;
-            font-weight: 600;
-            line-height: 1.4;
-        }
-        
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-        
-        .option {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 16px;
-            padding: 18px 20px;
-            color: white;
-            font-size: 16px;
-            font-weight: 500;
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: left;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .option::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .option:hover::before {
-            left: 100%;
-        }
-        
-        .option:active {
-            transform: scale(0.98);
-        }
-        
-        .option.correct {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            border-color: white;
-            animation: pulse 0.5s;
-        }
-        
-        .option.wrong {
-            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
-            border-color: white;
-            animation: shake 0.5s;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
-        }
-        
-        .option.disabled {
-            cursor: not-allowed;
-        }
-        
-        .feedback {
-            text-align: center;
-            font-size: 20px;
-            font-weight: 700;
-            min-height: 30px;
-            margin-bottom: 16px;
-        }
-        
-        .feedback.correct { color: #38ef7d; }
-        .feedback.wrong { color: #ff6b6b; }
-        
-        .scoreboard {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
             backdrop-filter: blur(20px);
             border-radius: 20px;
             padding: 20px;
-            margin-top: 24px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        
+       
+        .stat-label {
+            color: rgba(255,255,255,0.75);
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+       
+        .stat-value {
+            color: white;
+            font-size: 32px;
+            font-weight: 800;
+        }
+       
+        .question-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 28px;
+            margin-bottom: 28px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+       
+        .question-label {
+            color: rgba(255,255,255,0.75);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+       
+        .question-text {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+       
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+       
+        .option {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 20px 24px;
+            color: white;
+            font-size: 17px;
+            font-weight: 500;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+       
+        .option:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+       
+        .option:active {
+            transform: scale(0.98);
+        }
+       
+        .option.correct {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            border-color: rgba(255,255,255,0.5);
+        }
+       
+        .option.wrong {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+            border-color: rgba(255,255,255,0.5);
+        }
+       
+        .option.disabled {
+            cursor: not-allowed;
+        }
+       
+        .feedback {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 700;
+            min-height: 32px;
+            animation: popIn 0.3s ease;
+        }
+       
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+       
+        .feedback.correct { color: #38ef7d; }
+        .feedback.wrong { color: #ff6b6b; }
+       
+        .scoreboard {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 24px;
+            margin-top: 28px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+       
         .scoreboard-title {
             color: white;
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 16px;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
-        
+       
         .score-list {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            max-height: 200px;
+            gap: 12px;
+            max-height: 240px;
             overflow-y: auto;
         }
-        
+       
         .score-item {
             background: rgba(255,255,255,0.1);
-            padding: 12px 16px;
-            border-radius: 12px;
+            padding: 14px 20px;
+            border-radius: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: white;
-            transition: all 0.2s;
         }
-        
-        .score-item:hover {
-            background: rgba(255,255,255,0.15);
-        }
-        
+       
         .score-rank {
             font-weight: 600;
-            font-size: 14px;
+            font-size: 15px;
         }
-        
+       
         .score-points {
             font-weight: 700;
             color: #ffd700;
         }
-        
+       
         .hidden {
             display: none;
         }
-        
+       
         /* Install Prompt */
         .install-prompt {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
+            bottom: 24px;
+            left: 24px;
+            right: 24px;
             background: white;
-            border-radius: 16px;
-            padding: 16px;
+            border-radius: 20px;
+            padding: 20px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.3);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
             animation: slideUp 0.3s ease;
-            z-index: 1000;
         }
-        
+       
         @keyframes slideUp {
             from { transform: translateY(100px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
-        
+       
         .install-prompt-text {
             flex: 1;
         }
-        
+       
         .install-prompt-title {
-            font-weight: 600;
-            margin-bottom: 4px;
-            color: #333;
+            font-weight: 700;
+            margin-bottom: 6px;
         }
-        
+       
         .install-prompt-desc {
-            font-size: 13px;
+            font-size: 14px;
             color: #666;
         }
-        
+       
         .install-btn {
             background: #667eea;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 12px 24px;
+            border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
         }
-        
+       
         .install-btn:hover {
-            background: #5a67d8;
+            background: #5a6fd8;
         }
-        
+       
         .close-install {
             background: none;
             border: none;
-            font-size: 24px;
+            font-size: 28px;
             color: #999;
             cursor: pointer;
             padding: 0;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
+            width: 36px;
+            height: 36px;
             transition: all 0.2s;
         }
-        
+       
         .close-install:hover {
-            background: #f0f0f0;
             color: #666;
-        }
-        
-        /* Progress Bar */
-        .progress-container {
-            background: rgba(255,255,255,0.1);
-            height: 8px;
-            border-radius: 4px;
-            margin-bottom: 24px;
-            overflow: hidden;
-        }
-        
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #38ef7d, #11998e);
-            border-radius: 4px;
-            width: 0%;
-            transition: width 0.5s ease;
         }
     </style>
 </head>
@@ -483,32 +413,21 @@
             <div class="header">
                 <div class="app-icon">🧠</div>
                 <h1 class="app-title">QuizMaster</h1>
-                <p class="app-subtitle">Master Your Knowledge</p>
+                <p class="app-subtitle">Master IPA Transcription</p>
             </div>
-            
+           
             <div class="category-card" onclick="startQuiz('ipa')">
                 <div class="category-header">
                     <div class="category-icon icon-purple">📖</div>
                     <div class="category-info">
                         <div class="category-name">IPA Transcription</div>
-                        <div class="category-desc">Master phonetic sounds and symbols</div>
+                        <div class="category-desc">Master phonetic sounds and symbols for words</div>
                         <div class="category-score" id="ipaScore"></div>
                     </div>
                 </div>
             </div>
-            
-            <div class="category-card" onclick="startQuiz('mixed')">
-                <div class="category-header">
-                    <div class="category-icon icon-blue">🌍</div>
-                    <div class="category-info">
-                        <div class="category-name">Mixed Knowledge</div>
-                        <div class="category-desc">IPA, pronunciation & general knowledge</div>
-                        <div class="category-score" id="mixedScore"></div>
-                    </div>
-                </div>
-            </div>
         </div>
-        
+       
         <!-- Quiz Screen -->
         <div id="quizScreen" class="hidden">
             <div class="quiz-header">
@@ -516,11 +435,7 @@
                 <div class="quiz-title" id="quizTitle"></div>
                 <div style="width: 44px;"></div>
             </div>
-            
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-            
+           
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-label">Score</div>
@@ -535,23 +450,23 @@
                     <div class="stat-value" id="streak">0</div>
                 </div>
             </div>
-            
+           
             <div class="question-card">
                 <div class="question-label" id="questionLabel">Question:</div>
                 <div class="question-text" id="questionText"></div>
             </div>
-            
+           
             <div class="options" id="options"></div>
-            
+           
             <div class="feedback" id="feedback"></div>
-            
+           
             <div class="scoreboard">
                 <div class="scoreboard-title">🏆 High Scores</div>
                 <div class="score-list" id="scoreList"></div>
             </div>
         </div>
     </div>
-    
+   
     <!-- Install Prompt -->
     <div id="installPrompt" class="install-prompt hidden">
         <div class="install-prompt-text">
@@ -561,7 +476,6 @@
         <button class="install-btn" onclick="installApp()">Install</button>
         <button class="close-install" onclick="closeInstallPrompt()">×</button>
     </div>
-
     <script>
         const data = {
             ipa: {
@@ -575,52 +489,61 @@
                     {q: "important", a: "/ɪmˈpɔːtnt/", o: ["/ɪmˈpɔːtnt/", "/ɪmˈpɔrtənt/", "/ɪmˈpɔːtənt/", "/ˈɪmpɔːtnt/"]},
                     {q: "knowledge", a: "/ˈnɒlɪdʒ/", o: ["/ˈnɒlɪdʒ/", "/ˈnɑːlɪdʒ/", "/nɒˈlɪdʒ/", "/ˈnɒlədʒ/"]},
                     {q: "leadership", a: "/ˈliːdəʃɪp/", o: ["/ˈliːdəʃɪp/", "/ˈliːdərʃɪp/", "/liːˈdəʃɪp/", "/ˈlɪdəʃɪp/"]},
-                    {q: "pronunciation", a: "/prəˌnʌnsiˈeɪʃn/", o: ["/prəˌnʌnsiˈeɪʃn/", "/proʊˌnʌnsiˈeɪʃn/", "/prəˌnaʊnsiˈeɪʃn/", "/prəˌnʌnsiˈeɪʃən/"]},
-                    {q: "language", a: "/ˈlæŋɡwɪdʒ/", o: ["/ˈlæŋɡwɪdʒ/", "/ˈlæŋɡwɪdʒ/", "/ˈlæŋɡwɪdʒ/", "/ˈlæŋɡwɪdʒ/"]},
-                    {q: "phonetics", a: "/fəˈnɛtɪks/", o: ["/fəˈnɛtɪks/", "/foʊˈnɛtɪks/", "/fəˈnɛtɪks/", "/fəˈnɛtɪks/"]},
-                    {q: "syllable", a: "/ˈsɪləbəl/", o: ["/ˈsɪləbəl/", "/ˈsɪləbl/", "/ˈsɪləbəl/", "/ˈsɪləbəl/"]},
-                    {q: "stress", a: "/strɛs/", o: ["/strɛs/", "/streɪs/", "/strɛs/", "/strɛs/"]},
-                    {q: "vowel", a: "/ˈvaʊəl/", o: ["/ˈvaʊəl/", "/ˈvaʊəl/", "/ˈvaʊəl/", "/ˈvaʊəl/"]},
-                    {q: "consonant", a: "/ˈkɒnsənənt/", o: ["/ˈkɒnsənənt/", "/ˈkɑːnsənənt/", "/ˈkɒnsənənt/", "/ˈkɒnsənənt/"]},
-                    {q: "intonation", a: "/ˌɪntəˈneɪʃn/", o: ["/ˌɪntəˈneɪʃn/", "/ˌɪntoʊˈneɪʃn/", "/ˌɪntəˈneɪʃn/", "/ˌɪntəˈneɪʃn/"]},
-                    {q: "rhythm", a: "/ˈrɪðəm/", o: ["/ˈrɪðəm/", "/ˈrɪðəm/", "/ˈrɪðəm/", "/ˈrɪðəm/"]},
-                    {q: "accent", a: "/ˈæksɛnt/", o: ["/ˈæksɛnt/", "/ˈæksɛnt/", "/ˈæksɛnt/", "/ˈæksɛnt/"]},
-                    {q: "diphthong", a: "/ˈdɪfθɒŋ/", o: ["/ˈdɪfθɒŋ/", "/ˈdɪfθɔːŋ/", "/ˈdɪfθɒŋ/", "/ˈdɪfθɒŋ/"]},
-                    {q: "articulation", a: "/ɑːˌtɪkjʊˈleɪʃn/", o: ["/ɑːˌtɪkjʊˈleɪʃn/", "/ɑːrˌtɪkjʊˈleɪʃn/", "/ɑːˌtɪkjʊˈleɪʃn/", "/ɑːˌtɪkjʊˈleɪʃn/"]}
-                ]
-            },
-            mixed: {
-                name: 'Mixed Knowledge',
-                questions: [
-                    // IPA Questions
-                    {q: "What is the IPA transcription of 'think'?", a: "/θɪŋk/", o: ["/θɪŋk/", "/ðɪŋk/", "/tɪŋk/", "/sɪŋk/"], type: "ipa"},
-                    {q: "Which sound is represented by /ʃ/ in IPA?", a: "sh", o: ["sh", "ch", "th", "s"], type: "ipa"},
-                    {q: "What is the IPA transcription of 'church'?", a: "/tʃɜːtʃ/", o: ["/tʃɜːtʃ/", "/tʃɜːrtʃ/", "/tʃɜːtʃ/", "/tʃɜːtʃ/"], type: "ipa"},
-                    {q: "Which symbol represents the 'a' sound in 'cat'?", a: "/æ/", o: ["/æ/", "/ɑː/", "/eɪ/", "/ɛ/"], type: "ipa"},
-                    {q: "What is the IPA transcription of 'through'?", a: "/θruː/", o: ["/θruː/", "/ðruː/", "/truː/", "/θroʊ/"], type: "ipa"},
-                    
-                    // Pronunciation Questions
-                    {q: "Which word has a silent 'b'?", a: "Debt", o: ["Debt", "Bob", "Cabin", "Habit"], type: "pronunciation"},
-                    {q: "How many syllables in 'beautiful'?", a: "3", o: ["3", "2", "4", "5"], type: "pronunciation"},
-                    {q: "Which word has the stress on the second syllable?", a: "About", o: ["About", "Happy", "Doctor", "Monday"], type: "pronunciation"},
-                    {q: "Which letter is silent in 'island'?", a: "s", o: ["s", "a", "l", "d"], type: "pronunciation"},
-                    {q: "Which word rhymes with 'through'?", a: "Blue", o: ["Blue", "Though", "Tough", "Thought"], type: "pronunciation"},
-                    
-                    // General Knowledge Questions
-                    {q: "What is the capital of Australia?", a: "Canberra", o: ["Canberra", "Sydney", "Melbourne", "Brisbane"], type: "general"},
-                    {q: "Who painted the Mona Lisa?", a: "Leonardo da Vinci", o: ["Leonardo da Vinci", "Vincent van Gogh", "Pablo Picasso", "Michelangelo"], type: "general"},
-                    {q: "What is the largest planet in our solar system?", a: "Jupiter", o: ["Jupiter", "Saturn", "Neptune", "Uranus"], type: "general"},
-                    {q: "In which year did World War II end?", a: "1945", o: ["1945", "1944", "1946", "1943"], type: "general"},
-                    {q: "What is the smallest country in the world?", a: "Vatican City", o: ["Vatican City", "Monaco", "San Marino", "Liechtenstein"], type: "general"},
-                    {q: "Who wrote 'Romeo and Juliet'?", a: "William Shakespeare", o: ["William Shakespeare", "Charles Dickens", "Jane Austen", "Mark Twain"], type: "general"},
-                    {q: "What is the chemical symbol for gold?", a: "Au", o: ["Au", "Ag", "Fe", "Cu"], type: "general"},
-                    {q: "Which is the longest river in the world?", a: "Nile", o: ["Nile", "Amazon", "Yangtze", "Mississippi"], type: "general"},
-                    {q: "Who developed the theory of relativity?", a: "Albert Einstein", o: ["Albert Einstein", "Isaac Newton", "Stephen Hawking", "Galileo Galilei"], type: "general"},
-                    {q: "What is the largest ocean on Earth?", a: "Pacific Ocean", o: ["Pacific Ocean", "Atlantic Ocean", "Indian Ocean", "Arctic Ocean"], type: "general"}
+                    {q: "hello", a: "/həˈloʊ/", o: ["/həˈloʊ/", "/heˈloʊ/", "/hɛˈloʊ/", "/həˈləʊ/"]},
+                    {q: "world", a: "/wɜːrld/", o: ["/wɜːrld/", "/wɔːrld/", "/wʌrld/", "/wɝːld/"]},
+                    {q: "javascript", a: "/ˈdʒævəˌskrɪpt/", o: ["/ˈdʒævəˌskrɪpt/", "/ˈdʒɑːvəˌskrɪpt/", "/dʒəˈvæskrɪpt/", "/ˈdʒævəskrɪpt/"]},
+                    {q: "python", a: "/ˈpaɪθɑːn/", o: ["/ˈpaɪθɑːn/", "/ˈpɪθən/", "/paɪˈθɒn/", "/ˈpaɪθən/"]},
+                    {q: "machine", a: "/məˈʃiːn/", o: ["/məˈʃiːn/", "/mɑːˈʃiːn/", "/məˈʃɪn/", "/ˈmæʃiːn/"]},
+                    {q: "learning", a: "/ˈlɜːrnɪŋ/", o: ["/ˈlɜːrnɪŋ/", "/ˈlɝːnɪŋ/", "/lɜːrˈnɪŋ/", "/ˈlɑːrnɪŋ/"]},
+                    {q: "artificial", a: "/ˌɑːrtɪˈfɪʃl/", o: ["/ˌɑːrtɪˈfɪʃl/", "/ˌɑːrtəˈfɪʃl/", "/ɑːrˈtɪfɪʃl/", "/ˌɑːrtɪˈfɪʃəl/"]},
+                    {q: "intelligence", a: "/ɪnˈtɛlɪdʒəns/", o: ["/ɪnˈtɛlɪdʒəns/", "/ɪnˈtɛlədʒəns/", "/ɪnˈtelɪdʒəns/", "/ɪnˈtɛlɪdʒns/"]},
+                    {q: "quiz", a: "/kwɪz/", o: ["/kwɪz/", "/kwiːz/", "/kwəz/", "/kwɪs/"]},
+                    {q: "master", a: "/ˈmæstər/", o: ["/ˈmæstər/", "/ˈmɑːstə/", "/mæˈstər/", "/ˈmæstɚ/"]},
+                    {q: "example", a: "/ɪɡˈzæmpəl/", o: ["/ɪɡˈzæmpəl/", "/ɪɡˈzɑːmpəl/", "/ɛɡˈzæmpəl/", "/ɪɡˈzæmpl/"]},
+                    {q: "question", a: "/ˈkwɛstʃən/", o: ["/ˈkwɛstʃən/", "/ˈkwɛstʃɪn/", "/kwɛsˈtʃən/", "/ˈkwɛsʃən/"]},
+                    {q: "answer", a: "/ˈænsər/", o: ["/ˈænsər/", "/ˈɑːnsər/", "/ænˈsər/", "/ˈænsɚ/"]},
+                    {q: "science", a: "/ˈsaɪəns/", o: ["/ˈsaɪəns/", "/ˈsaɪɛns/", "/saɪˈəns/", "/ˈsaiəns/"]},
+                    {q: "technology", a: "/tɛkˈnɒlədʒi/", o: ["/tɛkˈnɒlədʒi/", "/tɛkˈnɑːlədʒi/", "/tekˈnɒlədʒi/", "/tɛkˈnɒlɪdʒi/"]},
+                    {q: "engineering", a: "/ˌɛndʒɪˈnɪərɪŋ/", o: ["/ˌɛndʒɪˈnɪərɪŋ/", "/ˌɛndʒəˈnɪərɪŋ/", "/ɛnˈdʒɪnɪərɪŋ/", "/ˌɛndʒɪˈnɪrɪŋ/"]},
+                    {q: "mathematics", a: "/ˌmæθəˈmætɪks/", o: ["/ˌmæθəˈmætɪks/", "/ˌmɑːθəˈmætɪks/", "/mæθˈəmætɪks/", "/ˌmæθəˈmɛtɪks/"]},
+                    {q: "history", a: "/ˈhɪstəri/", o: ["/ˈhɪstəri/", "/ˈhɪstɔːri/", "/hɪsˈtəri/", "/ˈhɪstɚi/"]},
+                    {q: "geography", a: "/dʒiˈɒɡrəfi/", o: ["/dʒiˈɒɡrəfi/", "/dʒiˈɑːɡrəfi/", "/dʒɪˈɒɡrəfi/", "/dʒiˈɒɡrəfɪ/"]},
+                    {q: "language", a: "/ˈlæŋɡwɪdʒ/", o: ["/ˈlæŋɡwɪdʒ/", "/ˈlɑːŋɡwɪdʒ/", "/læŋˈɡwɪdʒ/", "/ˈlæŋɡwədʒ/"]},
+                    {q: "culture", a: "/ˈkʌltʃər/", o: ["/ˈkʌltʃər/", "/ˈkʌltʃɚ/", "/kʌlˈtʃər/", "/ˈkɑːltʃər/"]},
+                    {q: "society", a: "/səˈsaɪəti/", o: ["/səˈsaɪəti/", "/soʊˈsaɪəti/", "/səˈsaɪɪti/", "/səˈsaɪətɪ/"]},
+                    {q: "economy", a: "/ɪˈkɒnəmi/", o: ["/ɪˈkɒnəmi/", "/ɪˈkɑːnəmi/", "/iːˈkɒnəmi/", "/ɪˈkɒnəmɪ/"]},
+                    {q: "politics", a: "/ˈpɒlɪtɪks/", o: ["/ˈpɒlɪtɪks/", "/ˈpɑːlɪtɪks/", "/pɒˈlɪtɪks/", "/ˈpɒlətɪks/"]},
+                    {q: "environment", a: "/ɪnˈvaɪrənmənt/", o: ["/ɪnˈvaɪrənmənt/", "/ɪnˈvaɪrənmɛnt/", "/ɛnˈvaɪrənmənt/", "/ɪnˈvaɪrnmənt/"]},
+                    {q: "nature", a: "/ˈneɪtʃər/", o: ["/ˈneɪtʃər/", "/ˈneɪtʃɚ/", "/neɪˈtʃər/", "/ˈnætʃər/"]},
+                    {q: "animal", a: "/ˈænɪməl/", o: ["/ˈænɪməl/", "/ˈænɪml/", "/æˈnɪməl/", "/ˈɑːnɪməl/"]},
+                    {q: "plant", a: "/plænt/", o: ["/plænt/", "/plɑːnt/", "/plænˈt/", "/plænts/"]},
+                    {q: "ocean", a: "/ˈoʊʃən/", o: ["/ˈoʊʃən/", "/ˈɒʃən/", "/oʊˈʃən/", "/ˈoʊʃn/"]},
+                    {q: "mountain", a: "/ˈmaʊntən/", o: ["/ˈmaʊntən/", "/ˈmaʊntɪn/", "/maʊnˈtən/", "/ˈmɑːntən/"]},
+                    {q: "river", a: "/ˈrɪvər/", o: ["/ˈrɪvər/", "/ˈrɪvɚ/", "/rɪˈvər/", "/ˈraɪvər/"]},
+                    {q: "city", a: "/ˈsɪti/", o: ["/ˈsɪti/", "/ˈsɪtɪ/", "/sɪˈti/", "/ˈsiːti/"]},
+                    {q: "country", a: "/ˈkʌntri/", o: ["/ˈkʌntri/", "/ˈkʌntrɪ/", "/kʌnˈtri/", "/ˈkɑːntri/"]},
+                    {q: "people", a: "/ˈpiːpəl/", o: ["/ˈpiːpəl/", "/ˈpiːpl/", "/piːˈpəl/", "/ˈpɛpəl/"]},
+                    {q: "person", a: "/ˈpɜːrsən/", o: ["/ˈpɜːrsən/", "/ˈpɝːsən/", "/pɜːrˈsən/", "/ˈpɜːrsn/"]},
+                    {q: "friend", a: "/frɛnd/", o: ["/frɛnd/", "/frɛnˈd/", "/frənd/", "/friːnd/"]},
+                    {q: "love", a: "/lʌv/", o: ["/lʌv/", "/lɑːv/", "/lʊv/", "/ləv/"]},
+                    {q: "happy", a: "/ˈhæpi/", o: ["/ˈhæpi/", "/ˈhæpɪ/", "/hæˈpi/", "/ˈheɪpi/"]},
+                    {q: "sad", a: "/sæd/", o: ["/sæd/", "/sɑːd/", "/səd/", "/seɪd/"]},
+                    {q: "angry", a: "/ˈæŋɡri/", o: ["/ˈæŋɡri/", "/ˈæŋɡrɪ/", "/æŋˈɡri/", "/ˈɑːŋɡri/"]},
+                    {q: "fear", a: "/fɪr/", o: ["/fɪr/", "/fɪər/", "/fiːr/", "/fɛr/"]},
+                    {q: "joy", a: "/dʒɔɪ/", o: ["/dʒɔɪ/", "/dʒɔːɪ/", "/dʒoʊɪ/", "/dʒəɪ/"]},
+                    {q: "music", a: "/ˈmjuːzɪk/", o: ["/ˈmjuːzɪk/", "/ˈmjuːzək/", "/mjuːˈzɪk/", "/ˈmjuzɪk/"]},
+                    {q: "art", a: "/ɑːrt/", o: ["/ɑːrt/", "/ɑːrˈt/", "/ært/", "/ɑːrts/"]},
+                    {q: "book", a: "/bʊk/", o: ["/bʊk/", "/buːk/", "/bək/", "/bʊks/"]},
+                    {q: "read", a: "/riːd/", o: ["/riːd/", "/rɛd/", "/rɪd/", "/riːˈd/"]},
+                    {q: "write", a: "/raɪt/", o: ["/raɪt/", "/rɑɪt/", "/raɪˈt/", "/rɪt/"]},
+                    {q: "speak", a: "/spiːk/", o: ["/spiːk/", "/spɪk/", "/spiːˈk/", "/spɛk/"]},
+                    {q: "listen", a: "/ˈlɪsən/", o: ["/ˈlɪsən/", "/ˈlɪsn/", "/lɪˈsən/", "/ˈlɪzən/"]},
+                    {q: "think", a: "/θɪŋk/", o: ["/θɪŋk/", "/θɪŋˈk/", "/θaɪŋk/", "/θɪnk/"]},
+                    {q: "know", a: "/noʊ/", o: ["/noʊ/", "/nəʊ/", "/noː/", "/naʊ/"]}
                 ]
             }
         };
-        
+       
         let state = {
             category: null,
             score: 0,
@@ -628,13 +551,11 @@
             streak: 0,
             currentQ: null,
             showingFeedback: false,
-            highScores: {ipa: [], mixed: []},
-            questionsAnswered: 0,
-            totalQuestions: 10
+            highScores: {ipa: []}
         };
-        
+       
         let deferredPrompt;
-        
+       
         // PWA Install
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
@@ -643,7 +564,7 @@
                 document.getElementById('installPrompt').classList.remove('hidden');
             }, 3000);
         });
-        
+       
         function installApp() {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
@@ -653,38 +574,31 @@
                 });
             }
         }
-        
+       
         function closeInstallPrompt() {
             document.getElementById('installPrompt').classList.add('hidden');
         }
-        
+       
         function startQuiz(cat) {
             state.category = cat;
             state.score = 0;
             state.level = 1;
             state.streak = 0;
-            state.questionsAnswered = 0;
             document.getElementById('homeScreen').classList.add('hidden');
             document.getElementById('quizScreen').classList.remove('hidden');
             document.getElementById('quizTitle').textContent = data[cat].name;
-            document.getElementById('questionLabel').textContent = cat === 'ipa' ? 'Word:' : 'Question:';
-            updateProgressBar();
+            document.getElementById('questionLabel').textContent = 'Question:';
             loadQuestion();
             updateScoreboard();
         }
-        
+       
         function goHome() {
             saveScore();
             document.getElementById('quizScreen').classList.add('hidden');
             document.getElementById('homeScreen').classList.remove('hidden');
             updateHomeScores();
         }
-        
-        function updateProgressBar() {
-            const progress = (state.questionsAnswered / state.totalQuestions) * 100;
-            document.getElementById('progressBar').style.width = `${progress}%`;
-        }
-        
+       
         function loadQuestion() {
             const questions = data[state.category].questions;
             state.currentQ = questions[Math.floor(Math.random() * questions.length)];
@@ -694,7 +608,7 @@
             document.getElementById('streak').textContent = state.streak;
             document.getElementById('feedback').textContent = '';
             document.getElementById('feedback').className = 'feedback';
-            
+           
             const optionsEl = document.getElementById('options');
             optionsEl.innerHTML = '';
             const shuffled = [...state.currentQ.o].sort(() => Math.random() - 0.5);
@@ -707,13 +621,11 @@
             });
             state.showingFeedback = false;
         }
-        
+       
         function checkAnswer(answer, btn) {
             if (state.showingFeedback) return;
             state.showingFeedback = true;
-            state.questionsAnswered++;
-            updateProgressBar();
-            
+           
             const options = document.querySelectorAll('.option');
             options.forEach(opt => {
                 opt.classList.add('disabled');
@@ -721,7 +633,7 @@
                     opt.classList.add('correct');
                 }
             });
-            
+           
             const feedbackEl = document.getElementById('feedback');
             if (answer === state.currentQ.a) {
                 btn.classList.add('correct');
@@ -730,46 +642,21 @@
                 state.score++;
                 state.streak++;
                 if (state.score % 5 === 0) state.level++;
-                
-                if (state.questionsAnswered >= state.totalQuestions) {
-                    setTimeout(() => {
-                        endQuiz();
-                    }, 1500);
-                } else {
-                    setTimeout(loadQuestion, 1500);
-                }
+                setTimeout(loadQuestion, 1500);
             } else {
                 btn.classList.add('wrong');
                 feedbackEl.textContent = '✗ Wrong!';
                 feedbackEl.className = 'feedback wrong';
                 saveScore();
                 state.streak = 0;
-                
-                if (state.questionsAnswered >= state.totalQuestions) {
-                    setTimeout(() => {
-                        endQuiz();
-                    }, 1500);
-                } else {
-                    setTimeout(() => {
-                        state.score = 0;
-                        state.level = 1;
-                        loadQuestion();
-                    }, 2500);
-                }
+                setTimeout(() => {
+                    state.score = 0;
+                    state.level = 1;
+                    loadQuestion();
+                }, 2500);
             }
         }
-        
-        function endQuiz() {
-            const feedbackEl = document.getElementById('feedback');
-            feedbackEl.textContent = `Quiz Complete! Final Score: ${state.score}`;
-            feedbackEl.className = 'feedback correct';
-            saveScore();
-            
-            setTimeout(() => {
-                goHome();
-            }, 3000);
-        }
-        
+       
         function saveScore() {
             if (state.score > 0) {
                 state.highScores[state.category].push(state.score);
@@ -778,7 +665,7 @@
                 updateScoreboard();
             }
         }
-        
+       
         function updateScoreboard() {
             const list = document.getElementById('scoreList');
             list.innerHTML = '';
@@ -795,9 +682,9 @@
                 list.appendChild(item);
             });
         }
-        
+       
         function updateHomeScores() {
-            ['ipa', 'mixed'].forEach(cat => {
+            ['ipa'].forEach(cat => {
                 const el = document.getElementById(`${cat}Score`);
                 const scores = state.highScores[cat];
                 if (scores.length > 0) {
@@ -809,7 +696,7 @@
                 }
             });
         }
-        
+       
         // Initialize
         updateHomeScores();
     </script>
