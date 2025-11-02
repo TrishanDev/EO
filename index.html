@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Master IPA, Emotional Intelligence, Leadership & Education">
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlF1aXpNYXN0ZXIiLAogICJzaG9ydF9uYW1lIjogIlF1aXpNYXN0ZXIiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzY2N2VlYSIsCiAgInRoZW1lX2NvbG9yIjogIiM2NjdlZWEiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSFpwWlhkQ2IzZzlJakFnTUNBeE1UZ2dNVEU0SWo0OGNtVmpkQ0IzYVdSMGFEMGlNVEU0SWlCb1pXbG5hSFE5SWpFeE9DSWdabWxzYkQwaUl6WTJOMlZsWVNJdlBqeDBaWGgwSUhnOUlqVTVJaUI1UFNJMU9TSWdabWxzYkQwaUkzZG9hWFJsSWlCbWIyNTBMV1poYldsc2VUMGljMkZ1Y3kxelpYSnBaaUlnWm05dWRDMXphWHBsUFNJME1DSWdkR1Y0ZEMxaGJtTm9iM0k5SW0xcFpHUnNaU0krUWp3dmRHVjRkRDQ4TDNOMlp6ND0iLAogICAgICAic2l6ZXMiOiAiMTkyeDE5MiIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiCiAgICB9CiAgXQp9">
+    <title>QuizMaster - Mobile Quiz App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 16px;
+            min-height: 100vh;
+        }
+        
+        /* Home Screen */
+        .header {
+            text-align: center;
+            padding: 32px 0 24px;
+        }
+        
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+        
+        .app-title {
+            color: white;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .app-subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+        }
+        
+        .category-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .category-card:active {
+            transform: scale(0.97);
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .category-header {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        
+        .category-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+        
+        .icon-purple { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .icon-red { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .icon-blue { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .icon-green { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        
+        .category-info {
+            flex: 1;
+        }
+        
+        .category-name {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        
+        .category-desc {
+            color: rgba(255,255,255,0.7);
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        
+        .category-score {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+            color: #ffd700;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        /* Quiz Screen */
+        .quiz-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+        }
+        
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quiz-title {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+        }
+        
+        .stat-label {
+            color: rgba(255,255,255,0.7);
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+        
+        .stat-value {
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .question-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .question-label {
+            color: rgba(255,255,255,0.7);
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+        
+        .question-text {
+            color: white;
+            font-size: 22px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .option {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 18px 20px;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+        
+        .option:active {
+            transform: scale(0.98);
+        }
+        
+        .option.correct {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            border-color: white;
+        }
+        
+        .option.wrong {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+            border-color: white;
+        }
+        
+        .option.disabled {
+            cursor: not-allowed;
+        }
+        
+        .feedback {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            min-height: 30px;
+        }
+        
+        .feedback.correct { color: #38ef7d; }
+        .feedback.wrong { color: #ff6b6b; }
+        
+        .scoreboard {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+        
+        .scoreboard-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .score-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .score-item {
+            background: rgba(255,255,255,0.1);
+            padding: 12px 16px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        
+        .score-rank {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .score-points {
+            font-weight: 700;
+            color: #ffd700;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        /* Install Prompt */
+        .install-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .install-prompt-text {
+            flex: 1;
+        }
+        
+        .install-prompt-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .install-prompt-desc {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .install-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .close-install {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #999;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Home Screen -->
+        <div id="homeScreen">
+            <div class="header">
+                <div class="app-icon">🧠</div>
+                <h1 class="app-title">QuizMaster</h1>
+                <p class="app-subtitle">Master Your Knowledge</p>
+            </div>
+            
+            <div class="category-card" onclick="startQuiz('ipa')">
+                <div class="category-header">
+                    <div class="category-icon icon-purple">📖</div>
+                    <div class="category-info">
+                        <div class="category-name">IPA Transcription</div>
+                        <div class="category-desc">Master phonetic sounds and symbols</div>
+                        <div class="category-score" id="ipaScore"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category-card" onclick="startQuiz('emotional')">
+                <div class="category-header">
+                    <div class="category-icon icon-red">❤️</div>
+                    <div class="category-info">
+                        <div class="category-name">Emotional Intelligence</div>
+                        <div class="category-desc">Understanding and managing emotions</div>
+                        <div class="category-score" id="emotionalScore"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category-card" onclick="startQuiz('leadership')">
+                <div class="category-header">
+                    <div class="category-icon icon-blue">👥</div>
+                    <div class="category-info">
+                        <div class="category-name">Leadership</div>
+                        <div class="category-desc">Principles of effective leadership</div>
+                        <div class="category-score" id="leadershipScore"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category-card" onclick="startQuiz('education')">
+                <div class="category-header">
+                    <div class="category-icon icon-green">🎓</div>
+                    <div class="category-info">
+                        <div class="category-name">Future of Education</div>
+                        <div class="category-desc">Global education trends & challenges</div>
+                        <div class="category-score" id="educationScore"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quiz Screen -->
+        <div id="quizScreen" class="hidden">
+            <div class="quiz-header">
+                <button class="back-btn" onclick="goHome()">←</button>
+                <div class="quiz-title" id="quizTitle"></div>
+                <div style="width: 40px;"></div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Score</div>
+                    <div class="stat-value" id="score">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Level</div>
+                    <div class="stat-value" id="level">1</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Streak</div>
+                    <div class="stat-value" id="streak">0</div>
+                </div>
+            </div>
+            
+            <div class="question-card">
+                <div class="question-label" id="questionLabel">Question:</div>
+                <div class="question-text" id="questionText"></div>
+            </div>
+            
+            <div class="options" id="options"></div>
+            
+            <div class="feedback" id="feedback"></div>
+            
+            <div class="scoreboard">
+                <div class="scoreboard-title">🏆 High Scores</div>
+                <div class="score-list" id="scoreList"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Install Prompt -->
+    <div id="installPrompt" class="install-prompt hidden">
+        <div class="install-prompt-text">
+            <div class="install-prompt-title">Install QuizMaster</div>
+            <div class="install-prompt-desc">Add to home screen for quick access</div>
+        </div>
+        <button class="install-btn" onclick="installApp()">Install</button>
+        <button class="close-install" onclick="closeInstallPrompt()">×</button>
+    </div>
+
+    <script>
+        const data = {
+            ipa: {
+                name: 'IPA Transcription',
+                questions: [
+                    {q: "about", a: "/əˈbaʊt/", o: ["/əˈbaʊt/", "/əˈbɑʊt/", "/aˈbaʊt/", "/əˈboʊt/"]},
+                    {q: "beautiful", a: "/ˈbjuːtɪfəl/", o: ["/ˈbjuːtɪfəl/", "/ˈbjutɪfəl/", "/ˈbʊtɪfəl/", "/ˈbjuːtəfəl/"]},
+                    {q: "computer", a: "/kəmˈpjuːtə/", o: ["/kəmˈpjuːtə/", "/kɒmˈpjuːtə/", "/kəmˈpjutə/", "/kəmˈpjuːtər/"]},
+                    {q: "education", a: "/ˌɛdʒuˈkeɪʃn/", o: ["/ˌɛdʒuˈkeɪʃn/", "/ˌɛdʒʊˈkeɪʃn/", "/ˌɛdʒuˈkeʃn/", "/ˌɛdʒəˈkeɪʃn/"]},
+                    {q: "family", a: "/ˈfæmɪli/", o: ["/ˈfæmɪli/", "/ˈfæməli/", "/fæˈmɪli/", "/ˈfeɪmɪli/"]},
+                    {q: "important", a: "/ɪmˈpɔːtnt/", o: ["/ɪmˈpɔːtnt/", "/ɪmˈpɔrtənt/", "/ɪmˈpɔːtənt/", "/ˈɪmpɔːtnt/"]},
+                    {q: "knowledge", a: "/ˈnɒlɪdʒ/", o: ["/ˈnɒlɪdʒ/", "/ˈnɑːlɪdʒ/", "/nɒˈlɪdʒ/", "/ˈnɒlədʒ/"]},
+                    {q: "leadership", a: "/ˈliːdəʃɪp/", o: ["/ˈliːdəʃɪp/", "/ˈliːdərʃɪp/", "/liːˈdəʃɪp/", "/ˈlɪdəʃɪp/"]},
+                ]
+            },
+            emotional: {
+                name: 'Emotional Intelligence',
+                questions: [
+                    {q: "Ability to recognize your own emotions?", a: "Self-awareness", o: ["Self-awareness", "Self-regulation", "Empathy", "Social skills"]},
+                    {q: "Managing emotional responses is called?", a: "Self-regulation", o: ["Motivation", "Self-regulation", "Empathy", "Self-awareness"]},
+                    {q: "Understanding others' feelings is?", a: "Empathy", o: ["Sympathy", "Empathy", "Compassion", "Pity"]},
+                    {q: "What drives goal achievement?", a: "Motivation", o: ["Motivation", "Determination", "Willpower", "Enthusiasm"]},
+                    {q: "EQ was popularized by?", a: "Daniel Goleman", o: ["Sigmund Freud", "Daniel Goleman", "Carl Jung", "B.F. Skinner"]},
+                    {q: "Conflict resolution requires?", a: "Active listening", o: ["Arguing", "Active listening", "Ignoring", "Dominating"]},
+                    {q: "High EQ improves?", a: "Relationships", o: ["Math skills", "Relationships", "Memory", "Speed"]},
+                ]
+            },
+            leadership: {
+                name: 'Leadership',
+                questions: [
+                    {q: "Transformational leaders focus on?", a: "Inspiring change", o: ["Status quo", "Inspiring change", "Micromanaging", "Rules only"]},
+                    {q: "Trust building requires?", a: "Transparency", o: ["Authority", "Transparency", "Control", "Distance"]},
+                    {q: "Servant leadership prioritizes?", a: "Team needs", o: ["Leader goals", "Team needs", "Profit only", "Competition"]},
+                    {q: "Vision in leadership means?", a: "Future direction", o: ["Past success", "Future direction", "Daily tasks", "Problems"]},
+                    {q: "Adaptive leaders show?", a: "Flexibility", o: ["Rigidity", "Flexibility", "Predictability", "Routine"]},
+                    {q: "Effective delegation needs?", a: "Trust", o: ["Control", "Trust", "Supervision", "Avoidance"]},
+                ]
+            },
+            education: {
+                name: 'Future of Education',
+                questions: [
+                    {q: "Technology transforming education?", a: "AI & ML", o: ["Typewriters", "AI & ML", "Projectors", "Chalkboards"]},
+                    {q: "Personalized learning focuses on?", a: "Individual needs", o: ["One-size-fits-all", "Individual needs", "Standardized tests", "Conformity"]},
+                    {q: "Future classrooms will feature?", a: "Hybrid models", o: ["Only textbooks", "Hybrid models", "No technology", "Lectures only"]},
+                    {q: "Most important future skill?", a: "Critical thinking", o: ["Memorization", "Critical thinking", "Following orders", "Copying"]},
+                    {q: "Global education emphasizes?", a: "Collaboration", o: ["Competition", "Collaboration", "Isolation", "Conformity"]},
+                    {q: "VR in education creates?", a: "Immersive experiences", o: ["Confusion", "Immersive experiences", "Distractions", "Boredom"]},
+                    {q: "Lifelong learning means?", a: "Continuous development", o: ["School only", "Continuous development", "No learning", "Job training"]},
+                ]
+            }
+        };
+        
+        let state = {
+            category: null,
+            score: 0,
+            level: 1,
+            streak: 0,
+            currentQ: null,
+            showingFeedback: false,
+            highScores: {ipa: [], emotional: [], leadership: [], education: []}
+        };
+        
+        let deferredPrompt;
+        
+        // PWA Install
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            setTimeout(() => {
+                document.getElementById('installPrompt').classList.remove('hidden');
+            }, 3000);
+        });
+        
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    deferredPrompt = null;
+                    closeInstallPrompt();
+                });
+            }
+        }
+        
+        function closeInstallPrompt() {
+            document.getElementById('installPrompt').classList.add('hidden');
+        }
+        
+        function startQuiz(cat) {
+            state.category = cat;
+            state.score = 0;
+            state.level = 1;
+            state.streak = 0;
+            document.getElementById('homeScreen').classList.add('hidden');
+            document.getElementById('quizScreen').classList.remove('hidden');
+            document.getElementById('quizTitle').textContent = data[cat].name;
+            document.getElementById('questionLabel').textContent = cat === 'ipa' ? 'Word:' : 'Question:';
+            loadQuestion();
+            updateScoreboard();
+        }
+        
+        function goHome() {
+            saveScore();
+            document.getElementById('quizScreen').classList.add('hidden');
+            document.getElementById('homeScreen').classList.remove('hidden');
+            updateHomeScores();
+        }
+        
+        function loadQuestion() {
+            const questions = data[state.category].questions;
+            state.currentQ = questions[Math.floor(Math.random() * questions.length)];
+            document.getElementById('questionText').textContent = state.currentQ.q;
+            document.getElementById('score').textContent = state.score;
+            document.getElementById('level').textContent = state.level;
+            document.getElementById('streak').textContent = state.streak;
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('feedback').className = 'feedback';
+            
+            const optionsEl = document.getElementById('options');
+            optionsEl.innerHTML = '';
+            const shuffled = [...state.currentQ.o].sort(() => Math.random() - 0.5);
+            shuffled.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option';
+                btn.textContent = opt;
+                btn.onclick = () => checkAnswer(opt, btn);
+                optionsEl.appendChild(btn);
+            });
+            state.showingFeedback = false;
+        }
+        
+        function checkAnswer(answer, btn) {
+            if (state.showingFeedback) return;
+            state.showingFeedback = true;
+            
+            const options = document.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.classList.add('disabled');
+                if (opt.textContent === state.currentQ.a) {
+                    opt.classList.add('correct');
+                }
+            });
+            
+            const feedbackEl = document.getElementById('feedback');
+            if (answer === state.currentQ.a) {
+                btn.classList.add('correct');
+                feedbackEl.textContent = '✓ Correct!';
+                feedbackEl.className = 'feedback correct';
+                state.score++;
+                state.streak++;
+                if (state.score % 5 === 0) state.level++;
+                setTimeout(loadQuestion, 1500);
+            } else {
+                btn.classList.add('wrong');
+                feedbackEl.textContent = '✗ Wrong!';
+                feedbackEl.className = 'feedback wrong';
+                saveScore();
+                state.streak = 0;
+                setTimeout(() => {
+                    state.score = 0;
+                    state.level = 1;
+                    loadQuestion();
+                }, 2500);
+            }
+        }
+        
+        function saveScore() {
+            if (state.score > 0) {
+                state.highScores[state.category].push(state.score);
+                state.highScores[state.category].sort((a, b) => b - a);
+                state.highScores[state.category] = state.highScores[state.category].slice(0, 10);
+                updateScoreboard();
+            }
+        }
+        
+        function updateScoreboard() {
+            const list = document.getElementById('scoreList');
+            list.innerHTML = '';
+            const scores = state.highScores[state.category] || [];
+            if (scores.length === 0) {
+                list.innerHTML = '<div style="color: rgba(255,255,255,0.5); text-align: center; padding: 20px;">No scores yet</div>';
+                return;
+            }
+            scores.slice(0, 5).forEach((s, i) => {
+                const item = document.createElement('div');
+                item.className = 'score-item';
+                const medal = ['🥇', '🥈', '🥉'][i] || '';
+                item.innerHTML = `<span class="score-rank">#${i+1} ${medal}</span><span class="score-points">${s} pts</span>`;
+                list.appendChild(item);
+            });
+        }
+        
+        function updateHomeScores() {
+            ['ipa', 'emotional', 'leadership', 'education'].forEach(cat => {
+                const el = document.getElementById(`${cat}Score`);
+                const scores = state.highScores[cat];
+                if (scores.length > 0) {
+                    const best = Math.max(...scores);
+                    el.innerHTML = `🏆 Best: ${best}`;
+                    el.style.display = 'flex';
+                } else {
+                    el.style.display = 'none';
+                }
+            });
+        }
+        
+        // Initialize
+        updateHomeScores();
+    </script>
+</body>
+</html>
